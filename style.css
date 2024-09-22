@@ -1,0 +1,145 @@
+body {
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+td {
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
+    position: relative;
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+}
+
+td:hover {
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+}
+
+.cross::before,
+.cross::after {
+    animation: drawCross 0.5s ease-out forwards;
+}
+
+@keyframes drawCross {
+    from {
+        width: 0;
+    }
+    to {
+        width: 80%;
+    }
+}
+
+@keyframes drawCircle {
+    from {
+        width: 0;
+    }
+    to {
+        width: 60%;
+    }
+}
+
+.cross::before,
+.cross::after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 2px;
+    background-color: var(--cross-color, black);
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+}
+
+.cross::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.cross::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.circle::before {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    background-color: var(--circle-color, #f0f0f0);
+    border-radius: 50%;
+    border: 2px solid var(--circle-color-invert, #000000);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: drawCircle 0.5s ease-out forwards;
+}
+
+.clicked {
+    pointer-events: none;
+}
+
+.moon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: -20px 20px 0 0 #000000;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.moon-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 150px;
+    height: 150px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #e0e0e0;
+}
+
+.moon-container:hover {
+    cursor: pointer;
+    background-color: #d0d0d0;
+}
+
+.moon-container:hover .moon {
+    box-shadow: -20px 20px 0 0 #333333;
+}
+
+.player-turn {
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+button[id="restart"] {
+    margin-top: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    font-size: 20px;
+}
+
+@keyframes jump {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); } /* Moves the cell up */
+    100% { transform: translateY(0); }   /* Moves the cell back down */
+  }
+
+.win {
+    background-color: #00ff00 !important;
+    animation: jump 0.5s ease-in-out;
+}
