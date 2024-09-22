@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let firstTurn = true;
     let isFirstTwoMoves = 4;
     let win = false;
+    let isBlack = false;
     // Create rows and cells
     for (let i = 0; i < numRows; i++) {
         const row = document.createElement('tr');
@@ -53,6 +54,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 alert('Cell already clicked');
             }
             console.log(clicked);
+            if(isBlack){
+                for(let i = 0; i < 9; i++){
+                    const cell = document.getElementById(i + 1);
+                    cell.style.borderColor = "white";
+                    if(cell.classList.contains("cross")){
+                        cell.style.backgroundColor = "transparent";
+                        cell.style.color = "white";
+                        cell.style.setProperty('--cross-color', 'white');
+                    }
+                    else if(cell.classList.contains("circle")){
+                        cell.style.backgroundColor = "transparent";
+                        cell.style.color = "#f0f0f0";
+                        cell.style.setProperty('--circle-color', '#000000');
+                        cell.style.setProperty('--circle-color-invert', '#f0f0f0');
+                    }
+                }
+            }
         }
     });
     function check_win(){
@@ -76,8 +94,11 @@ document.addEventListener("DOMContentLoaded", function() {
         return false;
     }
     darkMode.addEventListener('click', function() {
+        toggle_darkmode();
+    });
+    function toggle_darkmode(){
         const currentBgColor = getComputedStyle(document.body).backgroundColor;
-
+        isBlack = !isBlack;
         if (currentBgColor === "rgb(240, 240, 240)") { // "#f0f0f0" is represented as "rgb(240, 240, 240)"
             document.body.style.backgroundColor = "black";
             document.body.style.color = "white";
@@ -121,8 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
         }
-
-    });
+    }
     reset.addEventListener('click', function() {
         for(let i = 0; i < clicked.length; i++){
             clicked[i] = null;
