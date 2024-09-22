@@ -133,13 +133,15 @@ button[id="restart"] {
     font-size: 20px;
 }
 
-@keyframes jump {
+@keyframes shake {
     0% { transform: translateY(0); }
-    50% { transform: translateY(-20px); } /* Moves the cell up */
-    100% { transform: translateY(0); }   /* Moves the cell back down */
+    25% { transform: translateY(-20px); }
+    50% { transform: translateY(0px); } 
+    75% { transform: translateY(-20px); }
+    100% { transform: translateY(0); } 
   }
 
 .win {
     background-color: #00ff00 !important;
-    animation: jump 0.5s ease-in-out;
+    animation: shake 0.5s ease-in-out;
 }
